@@ -8,17 +8,31 @@ import { GridstackModule, GridstackComponent } from 'gridstack/dist/angular';
 import { ChartModule } from 'primeng/chart';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FormsModule } from '@angular/forms';
 @NgModule({
-  declarations: [PrimengBarChartComponent, PrimengBtnComponent, PrimengTableComponent, PrimengTextareaComponent],
+  declarations: [
+    PrimengBarChartComponent,
+    PrimengBtnComponent,
+    PrimengTableComponent,
+    PrimengTextareaComponent,
+  ],
   imports: [
     CommonModule,
     GridstackModule,
     ChartModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    FormsModule,
+    InputTextareaModule,
   ],
-  exports: [PrimengBarChartComponent, PrimengBtnComponent, PrimengTableComponent, PrimengTextareaComponent,GridstackModule]
+  exports: [
+    PrimengBarChartComponent,
+    PrimengBtnComponent,
+    PrimengTableComponent,
+    PrimengTextareaComponent,
+    GridstackModule,
+  ],
 })
 export class WidgetModule {
   constructor() {
@@ -26,6 +40,7 @@ export class WidgetModule {
       PrimengBtnComponent,
       PrimengTableComponent,
       PrimengBarChartComponent,
+      PrimengTextareaComponent,
     ]);
   }
 }

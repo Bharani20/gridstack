@@ -1,21 +1,29 @@
+import { leadingComment } from '@angular/compiler';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { GridStack, GridStackOptions, GridStackWidget } from 'gridstack';
-import { elementCB, GridstackComponent, gsCreateNgComponents, NgGridStackOptions, NgGridStackWidget, nodesCB } from 'gridstack/dist/angular';
+import {
+  elementCB,
+  GridstackComponent,
+  gsCreateNgComponents,
+  NgGridStackOptions,
+  NgGridStackWidget,
+  nodesCB,
+} from 'gridstack/dist/angular';
 let ids = 1;
 @Component({
   selector: 'app-page-builder',
   templateUrl: './page-builder.component.html',
-  styleUrl: './page-builder.component.scss'
+  styleUrl: './page-builder.component.scss',
 })
-
 export class PageBuilderComponent implements OnInit {
-
   value!: string;
   @ViewChild(GridstackComponent) gridComp?: GridstackComponent;
   @ViewChild('origTextArea', { static: true })
   origTextEl?: ElementRef<HTMLTextAreaElement>;
   @ViewChild('textArea', { static: true })
   textEl?: ElementRef<HTMLTextAreaElement>;
+
+  selectedWidget!: NgGridStackWidget;
 
   // which sample to show
   public show = 5;
@@ -99,17 +107,17 @@ export class PageBuilderComponent implements OnInit {
     {
       x: 0,
       y: 0,
-      w: 1,
+      w: 2,
       h: 2,
       selector: 'app-primeng-btn',
-      input: { label: 'safodsgji ihgf isdh fushdf ' },
+      input: { label: 'Button' },
     },
     // { x: 1, y: 0, selector: 'app-a', input: { text: 'bar' } },
     {
-      x: 1,
+      x: 2,
       y: 0,
-      w: 4,
-      h: 2,
+      w: 10,
+      h: 4,
       selector: 'app-primeng-table',
       input: {
         tableData: [
@@ -310,13 +318,14 @@ export class PageBuilderComponent implements OnInit {
             '.sidebar-item',
             undefined,
             this.sidebarContent6
-          )
+          );
           break;
         case 6:
           data = this.nestedGridOptions;
-          GridStack.setupDragIn(
-            '.newWidget', { appendTo: 'body', helper: 'clone' }
-          );
+          GridStack.setupDragIn('.newWidget', {
+            appendTo: 'body',
+            helper: 'clone',
+          });
           break;
         case 7:
           data = this.twoGridOpt1;
@@ -435,5 +444,82 @@ export class PageBuilderComponent implements OnInit {
   public identify(index: number, w: GridStackWidget) {
     return w.id; // or use index if no id is set and you only modify at the end...
   }
-}
 
+  addWidget(widgetName: string) {
+    switch (widgetName) {
+      case 'primeng-btn':
+        const widget = {
+          x: 0,
+          y: 0,
+          w: 4,
+          h: 2,
+          selector: 'app-primeng-btn',
+          input: { label: 'Button from widget-panel' },
+        };
+        this.gridComp?.grid?.addWidget(widget);
+        break;
+      case 'primeng-bar-chart':
+        this.selectedWidget = {
+          x: 1,
+          y: 1,
+          w: 4,
+          h: 5,
+          selector: 'app-primeng-bar-chart',
+          input: { basicData: this.basicData, basicOptions: this.basicOptions },
+        };
+        this.gridComp?.grid?.addWidget(this.selectedWidget);
+        break;
+      case 'primeng-table':
+        this.selectedWidget = {
+          x: 2,
+          y: 0,
+          w: 10,
+          h: 4,
+          selector: 'app-primeng-table',
+          input: {
+            tableData: [
+              {
+                id: '1000',
+                code: 'f230fh0g3',
+                name: 'Bamboo Watch',
+                description: 'Product Description',
+                image: 'bamboo-watch.jpg',
+                price: 65,
+                category: 'Accessories',
+                quantity: 24,
+                inventoryStatus: 'INSTOCK',
+                rating: 5,
+              },
+              {
+                id: '1000',
+                code: 'f230fh0g3',
+                name: 'Bamboo Watch',
+                description: 'Product Description',
+                image: 'bamboo-watch.jpg',
+                price: 65,
+                category: 'Accessories',
+                quantity: 24,
+                inventoryStatus: 'INSTOCK',
+                rating: 5,
+              },
+            ],
+          },
+        };
+        this.gridComp?.grid?.addWidget(this.selectedWidget);
+        break;
+      case 'primeng-text-area':
+        this.selectedWidget = {
+          x: 2,
+          y: 0,
+          w: 10,
+          h: 4,
+          selector: 'app-primeng-textarea',
+          input: {
+            value: 'value goes here....',
+          },
+        };
+        this.gridComp?.grid?.addWidget(this.selectedWidget);
+        break;
+    }
+  }
+}
