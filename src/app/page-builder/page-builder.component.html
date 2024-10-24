@@ -1,0 +1,45 @@
+<div class="page-content">
+    <div class="widget-pannel">
+        <div class="flex flex-column h-full">
+            <div class="pt-4 pl-1 pr-1">
+                <p-floatLabel>
+                    <input pInputText id="widgets-search" style="width: 100%;" [(ngModel)]="value" />
+                    <label for="username">Search for widgets</label>
+                </p-floatLabel>
+            </div>
+            <div class="overflow-y-auto h-90">
+                <div class="sidebar-item">
+                    <div class="sidebar-item">
+                        <app-primeng-btn></app-primeng-btn>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid-zone">
+        <div class="container">
+            <p-button (click)="add()">add item</p-button>
+            <p-button (click)="delete()">remove item</p-button>
+            <p-button (click)="modify()">modify item</p-button>
+            <p-button (click)="newLayout()">new layout</p-button>
+            <p-button (click)="saveGrid()">Save</p-button>
+            <p-button (click)="clearGrid()">Clear</p-button>
+            <p-button (click)="loadGrid()">Load</p-button>
+            <gridstack [options]="gridOptionsFull" (changeCB)="onChange($event)" (resizeStopCB)="onResizeStop($event)">
+            </gridstack>
+        </div>
+    </div>
+    <div class="template-panel">
+        <div class="flex flex-column h-full">
+            <div class="pt-4 pl-1 pr-1">
+                <p-floatLabel>
+                    <input pInputText id="widgets-search" style="width: 100%;" [(ngModel)]="value" />
+                    <label for="username">Search for templates</label>
+                </p-floatLabel>
+            </div>
+            <div class="overflow-y-auto h-90">
+            </div>
+        </div>
+    </div>
+</div>
